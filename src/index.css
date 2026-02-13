@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* JacksonCartel - Dark Luxury Property Marketing Palette
+       Inspired by: Cyan/Teal property branding + Neon Lime + Red neon glow
+       Dark charcoal base with electric cyan primary, lime accent, red highlights */
+    --background: 210 15% 6%;
+    --foreground: 180 10% 92%;
+    --card: 210 12% 9%;
+    --card-foreground: 180 10% 92%;
+    --popover: 210 12% 9%;
+    --popover-foreground: 180 10% 92%;
+    --primary: 180 100% 42%;
+    --primary-foreground: 210 15% 6%;
+    --secondary: 210 10% 14%;
+    --secondary-foreground: 180 10% 85%;
+    --muted: 210 8% 16%;
+    --muted-foreground: 210 8% 55%;
+    --accent: 72 90% 50%;
+    --accent-foreground: 210 15% 6%;
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 8% 18%;
+    --input: 210 8% 18%;
+    --ring: 180 100% 42%;
+
+    /* Charts */
+    --chart-1: 180 100% 42%;
+    --chart-2: 72 90% 50%;
+    --chart-3: 0 75% 50%;
+    --chart-4: 180 60% 65%;
+    --chart-5: 72 60% 70%;
+
+    /* Sidebar */
+    --sidebar: 210 12% 8%;
+    --sidebar-foreground: 180 10% 92%;
+    --sidebar-primary: 180 100% 42%;
+    --sidebar-primary-foreground: 210 15% 6%;
+    --sidebar-accent: 210 10% 14%;
+    --sidebar-accent-foreground: 180 10% 85%;
+    --sidebar-border: 210 8% 18%;
+    --sidebar-ring: 180 100% 42%;
+
+    /* Custom brand tokens */
+    --cyan: 180 100% 42%;
+    --cyan-glow: 180 100% 55%;
+    --lime: 72 90% 50%;
+    --lime-glow: 72 90% 65%;
+    --neon-red: 0 85% 55%;
+    --neon-red-glow: 0 85% 68%;
+
+    /* Fonts */
+    --font-sans: 'Geist', sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+
+    /* Shadows */
+    --shadow-2xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.15);
+    --shadow-xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.15);
+    --shadow-sm: 0px 4px 8px -1px hsl(0 0% 0% / 0.20), 0px 1px 2px -2px hsl(0 0% 0% / 0.15);
+    --shadow: 0px 4px 8px -1px hsl(0 0% 0% / 0.20), 0px 1px 2px -2px hsl(0 0% 0% / 0.15);
+    --shadow-md: 0px 4px 8px -1px hsl(0 0% 0% / 0.25), 0px 2px 4px -2px hsl(0 0% 0% / 0.20);
+    --shadow-lg: 0px 4px 8px -1px hsl(0 0% 0% / 0.30), 0px 4px 6px -2px hsl(0 0% 0% / 0.25);
+    --shadow-xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.35), 0px 8px 10px -2px hsl(0 0% 0% / 0.25);
+    --shadow-2xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.45);
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--cyan) / 0.15);
+    --shadow-glow: 0 0 40px hsl(var(--cyan-glow) / 0.12);
+
+    /* Misc */
+    --tracking-normal: 0em;
+    --radius: 0.25rem;
+    --spacing: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    letter-spacing: var(--tracking-normal);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
