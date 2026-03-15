@@ -86,13 +86,16 @@ module.exports = {
   		},
   		boxShadow: {
   			elegant: 'var(--shadow-elegant)',
-  			glow: 'var(--shadow-glow)'
+  			glow: 'var(--glow-primary)',
+  			'glow-accent': 'var(--glow-accent)'
   		},
   		animation: {
   			'fade-in': 'fade-in 0.5s ease-out',
   			'slide-up': 'slide-up 0.5s ease-out',
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'border-beam': 'border-beam 3s infinite linear',
+  			'pulse-glow': 'pulse-glow 2s infinite ease-in-out'
   		},
   		keyframes: {
   			'fade-in': {
@@ -127,6 +130,19 @@ module.exports = {
   				},
   				to: {
   					height: '0'
+  				}
+  			},
+  			'border-beam': {
+  				'100%': {
+  					'offset-distance': '100%'
+  				}
+  			},
+  			'pulse-glow': {
+  				'0%, 100%': {
+  					opacity: '0.5'
+  				},
+  				'50%': {
+  					opacity: '1'
   				}
   			}
   		}

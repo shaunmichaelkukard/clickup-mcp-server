@@ -133,7 +133,7 @@ export function AdminProjects() {
           onClick={() => { setShowForm(!showForm); setEditing(null); setForm({ title: '', description: '', imageUrl: '', category: '', link: '' }); setLastSaved(null) }} 
           className={cn(
             "h-12 px-8 uppercase font-mono text-xs tracking-[0.2em] transition-all duration-500 rounded-xl border border-white/10",
-            showForm ? "btn-glass-secondary" : "btn-glass-primary glow-cyan"
+            showForm ? "btn-glass-secondary" : "btn-glass-primary glow-primary"
           )}
         >
           {showForm ? <X className="h-4 w-4 mr-2" /> : <Plus className="h-4 w-4 mr-2" />}
@@ -213,7 +213,7 @@ export function AdminProjects() {
           {!editing && (
             <Button 
               onClick={handleSave} 
-              className="btn-glass-primary w-full h-14 uppercase font-mono text-sm tracking-[0.2em] glow-cyan shadow-xl relative z-10"
+              className="btn-glass-primary w-full h-14 uppercase font-black text-[11px] tracking-[0.3em] glow-primary shadow-xl relative z-10"
             >
               Confirm & Create Project
             </Button>

@@ -41,10 +41,10 @@ export const Services = () => {
             className="glass-card p-10 group hover:scale-[1.02] transition-all duration-500 animate-slide-up"
             style={{ animationDelay: `${index * 100}ms` }}
           >
-            <div className="mb-8 h-16 w-16 rounded-2xl flex items-center justify-center glass border-white/10 text-primary group-hover:text-white group-hover:glow-cyan transition-all duration-500 group-hover:-translate-y-2">
+            <div className="mb-8 h-16 w-16 rounded-2xl flex items-center justify-center glass border-white/10 text-primary group-hover:text-white group-hover:glow-primary transition-all duration-500 group-hover:-translate-y-2">
               <service.icon className="h-8 w-8" />
             </div>
-            <h3 className="text-xl font-bold mb-4 uppercase tracking-tighter text-foreground group-hover:text-iridescent transition-colors">
+            <h3 className="text-xl font-black mb-4 uppercase tracking-tighter text-foreground group-hover:text-iridescent transition-colors leading-tight">
               {service.title}
             </h3>
             <p className="text-sm text-foreground/50 leading-relaxed group-hover:text-foreground/70 transition-colors">

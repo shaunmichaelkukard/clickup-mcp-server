@@ -56,9 +56,9 @@ export const LeadForm = () => {
     >
       <div className="space-y-8 animate-fade-in">
         <div className="glass-card p-8 group">
-          <h3 className="text-lg font-black uppercase tracking-widest mb-6 text-foreground group-hover:text-iridescent transition-colors flex items-center gap-3">
+          <h3 className="text-lg font-black uppercase tracking-[0.3em] mb-6 text-foreground group-hover:text-iridescent transition-colors flex items-center gap-3">
             <div className="h-1 w-8 bg-primary/40 rounded-full" />
-            Direct Contact
+            Direct Connect
           </h3>
           <p className="text-sm text-foreground/50 mb-8 leading-relaxed">
             For urgent inquiries or private portfolio discussions, reach out to our principal partners directly.
@@ -76,21 +76,21 @@ export const LeadForm = () => {
         </div>
 
         <div className="glass-card p-8">
-          <h3 className="text-lg font-black uppercase tracking-widest mb-8 text-foreground flex items-center gap-3">
+          <h3 className="text-lg font-black uppercase tracking-[0.3em] mb-8 text-foreground flex items-center gap-3">
             <div className="h-1 w-8 bg-accent/40 rounded-full" />
-            Global Offices
+            Elite Offices
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="space-y-4">
-              <div className="badge-glass w-fit text-primary font-bold shadow-glow-cyan">{settings.office1Name}</div>
-              <div className="space-y-1 text-xs text-foreground/40 leading-relaxed font-mono uppercase tracking-widest">
+              <div className="badge-glass w-fit text-primary font-black glow-primary border-primary/20">{settings.office1Name}</div>
+              <div className="space-y-1 text-[10px] text-foreground/40 leading-relaxed font-mono uppercase tracking-[0.2em]">
                 <p className="text-foreground/60">{settings.office1Address1}</p>
                 <p>{settings.office1Address2}</p>
               </div>
             </div>
             <div className="space-y-4">
-              <div className="badge-glass w-fit text-accent font-bold shadow-glow-violet">{settings.office2Name}</div>
-              <div className="space-y-1 text-xs text-foreground/40 leading-relaxed font-mono uppercase tracking-widest">
+              <div className="badge-glass w-fit text-accent font-black glow-accent border-accent/20">{settings.office2Name}</div>
+              <div className="space-y-1 text-[10px] text-foreground/40 leading-relaxed font-mono uppercase tracking-[0.2em]">
                 <p className="text-foreground/60">{settings.office2Address1}</p>
                 <p>{settings.office2Address2}</p>
               </div>
@@ -141,7 +141,7 @@ export const LeadForm = () => {
         <button 
           type="submit" 
           disabled={loading} 
-          className="btn-glass-primary w-full h-16 uppercase font-black tracking-[0.3em] text-[11px] flex items-center justify-center rounded-xl shadow-glow-cyan transition-all"
+          className="btn-glass-primary w-full h-16 uppercase font-black tracking-[0.4em] text-[11px] flex items-center justify-center rounded-xl glow-primary transition-all"
         >
           {loading ? 'Processing...' : 'Send Inquiry'} <Send className="ml-3 h-4 w-4" />
         </button>

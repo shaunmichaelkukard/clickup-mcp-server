@@ -15,13 +15,13 @@ export const Hero = () => {
           className="w-full h-full object-cover scale-105 animate-pulse-slow opacity-40 brightness-50"
           style={{ animationDuration: '8s' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/40 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,220,220,0.05),transparent_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_70%)]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
         <div className="space-y-10 animate-slide-up">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full glass border-white/10 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/90 mb-4 animate-fade-in shadow-glow-cyan">
+          <div className="inline-flex items-center space-x-3 px-5 py-2 rounded-full glass border-white/10 text-[10px] font-black uppercase tracking-[0.3em] text-primary/90 mb-6 animate-fade-in glow-primary">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -46,12 +46,12 @@ export const Hero = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <a href="#showcase" className="w-full sm:w-auto">
-              <button className="btn-glass-primary h-16 px-10 text-sm font-bold uppercase tracking-widest flex items-center justify-center group w-full sm:w-auto rounded-xl">
-                View Showcase <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <button className="btn-glass-primary h-16 px-12 text-[11px] font-black uppercase tracking-[0.3em] flex items-center justify-center group w-full sm:w-auto rounded-xl shadow-2xl">
+                View Showcase <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </a>
             <a href="#services" className="w-full sm:w-auto">
-              <button className="btn-glass-secondary h-16 px-10 text-sm font-bold uppercase tracking-widest text-foreground/80 hover:text-foreground w-full sm:w-auto rounded-xl">
+              <button className="btn-glass-secondary h-16 px-12 text-[11px] font-black uppercase tracking-[0.3em] text-foreground/60 hover:text-foreground w-full sm:w-auto rounded-xl border-white/5 hover:border-white/20 transition-all">
                 Our Services
               </button>
             </a>

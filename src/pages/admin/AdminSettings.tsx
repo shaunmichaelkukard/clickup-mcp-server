@@ -174,7 +174,7 @@ export function AdminSettings() {
 
   if (settingsLoading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-[#080c14]">
+      <div className="flex items-center justify-center h-screen bg-background">
         <div className="relative">
           <div className="absolute inset-0 blur-2xl bg-primary/20 animate-pulse" />
           <Loader2 className="h-10 w-10 animate-spin text-primary relative z-10" />
@@ -184,23 +184,23 @@ export function AdminSettings() {
   }
 
   return (
-    <div className="p-6 lg:p-10 space-y-10 max-w-5xl mx-auto">
+    <div className="p-6 lg:p-10 space-y-12 max-w-5xl mx-auto animate-fade-in">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold tracking-tighter uppercase text-iridescent">Site Settings</h1>
-          <p className="text-muted-foreground text-sm max-w-md">
-            Fine-tune every aspect of your website's presence, from hero sections to office details.
+        <div className="space-y-3">
+          <h1 className="text-4xl font-black tracking-tighter uppercase text-iridescent leading-none">Global Config</h1>
+          <p className="text-foreground/40 text-[10px] font-mono uppercase tracking-[0.2em]">
+            JacksonCartel Strategic Infrastructure
           </p>
           <div className="h-6">
             {saving ? (
-              <p className="text-[10px] font-mono uppercase text-primary animate-pulse flex items-center gap-2 px-2 py-1 glass-card w-fit rounded-full border-primary/20">
+              <p className="text-[10px] font-mono uppercase text-primary animate-pulse flex items-center gap-2 px-3 py-1.5 glass-card w-fit rounded-full border-primary/20 bg-primary/5">
                 <Loader2 className="h-3 w-3 animate-spin" />
-                Syncing changes...
+                Synchronizing...
               </p>
             ) : lastSaved ? (
-              <p className="text-[10px] font-mono uppercase text-muted-foreground flex items-center gap-2 px-2 py-1 glass-card w-fit rounded-full border-white/5 bg-white/5">
-                <CheckCircle2 className="h-3 w-3 text-green-500" />
-                Last saved: {lastSaved.toLocaleTimeString()}
+              <p className="text-[10px] font-mono uppercase text-green-500 flex items-center gap-2 px-3 py-1.5 glass-card w-fit rounded-full border-green-500/20 bg-green-500/5">
+                <CheckCircle2 className="h-3 w-3" />
+                Auto-saved {lastSaved.toLocaleTimeString()}
               </p>
             ) : null}
           </div>
@@ -208,54 +208,55 @@ export function AdminSettings() {
         <Button 
           onClick={() => handleSave()} 
           disabled={saving} 
-          className="btn-glass-primary h-12 px-8 uppercase font-mono text-xs tracking-widest glow-cyan shrink-0"
+          className="btn-glass-primary h-14 px-10 uppercase font-black text-xs tracking-[0.2em] glow-primary shrink-0 rounded-xl"
         >
-          {saving ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Save className="h-4 w-4 mr-2" />}
-          Save Changes
+          {saving ? <Loader2 className="h-4 w-4 animate-spin mr-3" /> : <Save className="h-4 w-4 mr-3" />}
+          Commit Changes
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-24">
-        {settingGroups.map((group) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-32">
+        {settingGroups.map((group, idx) => (
           <div 
             key={group.title} 
-            className="glass-card p-6 space-y-6 relative overflow-hidden group border-t border-l border-white/10"
+            className="glass-card p-8 space-y-8 relative overflow-hidden group border border-white/5 hover:border-primary/20 transition-all duration-500 animate-slide-up"
+            style={{ animationDelay: `${idx * 100}ms` }}
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl -mr-16 -mt-16 group-hover:bg-primary/10 transition-colors" />
+            <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 blur-3xl -mr-24 -mt-24 group-hover:bg-primary/10 transition-colors" />
             
-            <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-primary flex items-center gap-3">
-              <span className="w-8 h-[1px] bg-primary/30" />
+            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-primary flex items-center gap-4">
+              <span className="w-10 h-[1px] bg-primary/30" />
               {group.title}
             </h2>
             
-            <div className="space-y-5">
+            <div className="space-y-6">
               {group.fields.map((field) => (
-                <div key={field.key} className="space-y-2">
-                  <label className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest ml-1">
+                <div key={field.key} className="space-y-3">
+                  <label className="text-[10px] text-foreground/30 font-black uppercase tracking-[0.2em] ml-1">
                     {field.label}
                   </label>
                   {field.key === 'heroImageUrl' ? (
-                    <div className="space-y-3">
-                      <div className="flex gap-2">
+                    <div className="space-y-4">
+                      <div className="flex gap-3">
                         <Input
                           value={getVal(field.key)}
                           onChange={(e) => handleChange(field.key, e.target.value)}
-                          className="input-glass h-11 flex-1 text-sm"
-                          placeholder="URL..."
+                          className="input-glass h-12 flex-1 text-sm border-white/5 focus:border-primary/40 transition-all"
+                          placeholder="Image Source URL..."
                         />
-                        <label className="btn-glass-secondary flex items-center gap-2 px-4 h-11 cursor-pointer transition-all text-[10px] font-mono uppercase rounded-xl border border-white/10 shrink-0">
-                          {uploadingHero ? <Loader2 className="h-3 w-3 animate-spin" /> : <Upload className="h-3 w-3" />}
+                        <label className="btn-glass-secondary flex items-center justify-center px-5 h-12 cursor-pointer transition-all rounded-xl border border-white/5 hover:border-primary/30 active:scale-95 shrink-0 bg-white/5">
+                          {uploadingHero ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4 text-primary" />}
                           <input type="file" accept="image/*" className="hidden" onChange={handleHeroUpload} />
                         </label>
                       </div>
                       {getVal(field.key) && (
-                        <div className="relative group/img aspect-video rounded-xl overflow-hidden border border-white/10 shadow-lg">
+                        <div className="relative group/img aspect-video rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
                           <img
                             src={getVal(field.key)}
-                            alt="Hero preview"
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105"
+                            alt="Preview"
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110 brightness-75 group-hover/img:brightness-100"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover/img:opacity-20 transition-opacity" />
                         </div>
                       )}
                     </div>
@@ -263,13 +264,13 @@ export function AdminSettings() {
                     <Textarea
                       value={getVal(field.key)}
                       onChange={(e) => handleChange(field.key, e.target.value)}
-                      className="input-glass min-h-[100px] text-sm leading-relaxed"
+                      className="input-glass min-h-[120px] text-sm border-white/5 focus:border-primary/40 transition-all leading-relaxed p-5"
                     />
                   ) : (
                     <Input
                       value={getVal(field.key)}
                       onChange={(e) => handleChange(field.key, e.target.value)}
-                      className="input-glass h-11 text-sm"
+                      className="input-glass h-12 text-sm border-white/5 focus:border-primary/40 transition-all px-5"
                     />
                   )}
                 </div>
@@ -279,14 +280,14 @@ export function AdminSettings() {
         ))}
       </div>
 
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-4xl z-40 md:hidden">
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[calc(100%-4rem)] max-w-4xl z-40 md:hidden animate-fade-in">
         <Button 
           onClick={() => handleSave()} 
           disabled={saving} 
-          className="btn-glass-primary w-full h-14 uppercase font-mono tracking-widest text-sm glow-cyan shadow-2xl"
+          className="btn-glass-primary w-full h-16 uppercase font-black tracking-[0.3em] text-[11px] glow-primary shadow-2xl rounded-2xl"
         >
-          {saving ? <Loader2 className="h-5 w-5 animate-spin mr-2" /> : <Save className="h-5 w-5 mr-2" />}
-          Update All Settings
+          {saving ? <Loader2 className="h-5 w-5 animate-spin mr-3" /> : <Save className="h-5 w-5 mr-3" />}
+          Update All Infrastructure
         </Button>
       </div>
     </div>

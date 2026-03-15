@@ -84,7 +84,7 @@ export const Showcase = () => {
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 brightness-90 group-hover:brightness-100"
               />
               <div className="absolute top-4 left-4">
-                <span className="badge-glass text-white shadow-glow-cyan">
+                <span className="badge-glass text-white glow-primary border-primary/20">
                   {project.category}
                 </span>
               </div>
@@ -99,7 +99,7 @@ export const Showcase = () => {
                    <div className="text-[10px] font-mono text-primary/40 font-bold">0{index + 1}</div>
                    <div className="h-[1px] w-8 bg-primary/20" />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground mb-3 tracking-tighter group-hover:text-iridescent transition-colors">
+                <h3 className="text-2xl font-black text-foreground mb-3 tracking-tighter group-hover:text-iridescent transition-colors leading-none">
                   {project.title}
                 </h3>
                 <p className="text-sm text-foreground/50 leading-relaxed max-w-md">

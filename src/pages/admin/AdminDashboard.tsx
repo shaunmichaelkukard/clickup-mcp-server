@@ -47,10 +47,10 @@ export function AdminDashboard() {
   }, [user])
 
   const cards = [
-    { label: 'Strategic Projects', count: counts.projects, icon: FolderOpen, href: '/admin/projects', color: 'text-primary', shadow: 'shadow-glow-cyan' },
-    { label: 'Property Insights', count: counts.posts, icon: FileText, href: '/admin/blog', color: 'text-accent', shadow: 'shadow-glow-violet' },
-    { label: 'Business Inquiries', count: counts.leads, icon: Users, href: '/admin/leads', color: 'text-primary', shadow: 'shadow-glow-cyan' },
-    { label: 'Social Footprint', count: counts.social, icon: Share2, href: '/admin/social', color: 'text-accent', shadow: 'shadow-glow-violet' },
+    { label: 'Strategic Projects', count: counts.projects, icon: FolderOpen, href: '/admin/projects', color: 'text-primary', shadow: 'glow-primary' },
+    { label: 'Property Insights', count: counts.posts, icon: FileText, href: '/admin/blog', color: 'text-accent', shadow: 'glow-accent' },
+    { label: 'Business Inquiries', count: counts.leads, icon: Users, href: '/admin/leads', color: 'text-primary', shadow: 'glow-primary' },
+    { label: 'Social Footprint', count: counts.social, icon: Share2, href: '/admin/social', color: 'text-accent', shadow: 'glow-accent' },
   ]
 
   return (

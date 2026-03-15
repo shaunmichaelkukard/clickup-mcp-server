@@ -22,8 +22,8 @@ export const Navbar = () => {
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="text-xl font-bold tracking-tighter hover:opacity-80 transition-opacity">
-              <span className="text-glass-primary">{settings.brandName.slice(0, 7)}</span><span className="text-foreground/80">{settings.brandName.slice(7)}</span>
+            <Link to="/" className="text-xl font-black tracking-tighter hover:opacity-80 transition-opacity uppercase">
+              <span className="text-iridescent">{settings.brandName.slice(0, 7)}</span><span className="text-foreground/90">{settings.brandName.slice(7)}</span>
             </Link>
           </div>
 
@@ -41,12 +41,12 @@ export const Navbar = () => {
 
           <div className="hidden md:flex items-center gap-3">
             <a href="#contact">
-              <button className="btn-glass-primary px-5 py-2 rounded-full text-[10px] uppercase tracking-widest font-bold">
+              <button className="btn-glass-primary px-6 py-2.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-black">
                 Start Project
               </button>
             </a>
-            <Link to="/admin" className="p-2 text-foreground/50 hover:text-primary transition-colors glass rounded-full" title="Admin Hub">
-              <Settings className="h-3.5 w-3.5" />
+            <Link to="/admin" className="p-2.5 text-foreground/50 hover:text-primary transition-all glass rounded-full hover:scale-110 active:scale-95" title="Admin Hub">
+              <Settings className="h-4 w-4" />
             </Link>
           </div>
 

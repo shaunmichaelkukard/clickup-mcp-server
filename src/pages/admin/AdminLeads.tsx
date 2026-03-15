@@ -142,7 +142,7 @@ export function AdminLeads() {
                     onClick={() => handleStatusToggle(lead)}
                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all border ${
                       lead.status === 'contacted'
-                        ? 'bg-primary/10 text-primary border-primary/20 shadow-glow-cyan'
+                        ? 'bg-primary/10 text-primary border-primary/20 glow-primary'
                         : 'bg-white/5 text-foreground/40 border-white/5 hover:border-white/10'
                     }`}
                   >

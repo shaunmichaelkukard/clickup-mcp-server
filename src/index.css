@@ -6,74 +6,72 @@
 
 @layer base {
   :root {
-    /* Liquid Glass Theme - JacksonCartel
-       Deep blue-slate base with iridescent glass overlays
-       Inspired by frosted glass, prismatic light, holographic surfaces */
+    /* JacksonCartel Elite - Phantom Ember Theme
+       Deep volcanic glass base with vibrant blood-orange glows
+       Inspired by high-contrast luxury, strategic power, and elite precision */
     
-    --background: 220 25% 8%;
-    --foreground: 210 20% 94%;
-    --card: 220 22% 11%;
-    --card-foreground: 210 20% 94%;
-    --popover: 220 22% 10%;
-    --popover-foreground: 210 20% 94%;
+    --background: 224 71% 4%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 6%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 5%;
+    --popover-foreground: 210 40% 98%;
     
-    /* Cyan-teal primary with glass shimmer */
-    --primary: 185 85% 50%;
-    --primary-foreground: 220 25% 8%;
+    /* Blood Orange Primary */
+    --primary: 11 80% 55%;
+    --primary-foreground: 210 40% 98%;
     
     /* Subtle glass secondary */
-    --secondary: 220 18% 16%;
-    --secondary-foreground: 210 15% 80%;
+    --secondary: 222 47% 11%;
+    --secondary-foreground: 210 40% 98%;
     
-    --muted: 220 15% 18%;
-    --muted-foreground: 210 10% 52%;
+    --muted: 222 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
     
-    /* Iridescent accent - blue-violet */
-    --accent: 245 70% 65%;
-    --accent-foreground: 220 25% 8%;
+    /* Phantom Purple Accent */
+    --accent: 263 70% 50%;
+    --accent-foreground: 210 40% 98%;
     
-    --destructive: 0 72% 55%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
     
-    --border: 220 15% 22%;
-    --input: 220 15% 16%;
-    --ring: 185 85% 50%;
+    --border: 222 47% 15%;
+    --input: 222 47% 15%;
+    --ring: 11 80% 55%;
 
     /* Charts */
-    --chart-1: 185 85% 50%;
-    --chart-2: 245 70% 65%;
-    --chart-3: 320 70% 60%;
-    --chart-4: 45 90% 55%;
-    --chart-5: 155 65% 48%;
+    --chart-1: 11 80% 55%;
+    --chart-2: 263 70% 50%;
+    --chart-3: 20 90% 60%;
+    --chart-4: 280 70% 60%;
+    --chart-5: 15 80% 50%;
 
     /* Sidebar */
-    --sidebar: 220 25% 7%;
-    --sidebar-foreground: 210 20% 88%;
-    --sidebar-primary: 185 85% 50%;
-    --sidebar-primary-foreground: 220 25% 8%;
-    --sidebar-accent: 220 18% 14%;
-    --sidebar-accent-foreground: 210 15% 80%;
-    --sidebar-border: 220 15% 18%;
-    --sidebar-ring: 185 85% 50%;
+    --sidebar: 224 71% 3%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 11 80% 55%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 222 47% 10%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 47% 15%;
+    --sidebar-ring: 11 80% 55%;
 
-    /* Liquid Glass brand tokens */
-    --glass-bg: rgba(255, 255, 255, 0.04);
-    --glass-bg-hover: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.10);
-    --glass-border-bright: rgba(255, 255, 255, 0.20);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.08);
-    --glass-shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.12);
+    /* Elite brand tokens */
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-bg-hover: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-bright: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
 
-    /* Prismatic glow colors */
-    --glow-cyan: 0 0 30px rgba(0, 220, 220, 0.25);
-    --glow-violet: 0 0 30px rgba(130, 100, 255, 0.25);
-    --glow-rose: 0 0 30px rgba(255, 80, 160, 0.25);
+    /* Ember glow colors */
+    --glow-primary: 0 0 40px hsl(11 80% 55% / 0.25);
+    --glow-accent: 0 0 40px hsl(263 70% 50% / 0.25);
     
     /* Gradient mesh */
-    --gradient-primary: linear-gradient(135deg, hsl(185 85% 50%) 0%, hsl(245 70% 65%) 100%);
-    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
-    --gradient-iridescent: linear-gradient(135deg, hsl(185 85% 60%), hsl(245 70% 65%), hsl(320 70% 60%));
-    --gradient-button-primary: linear-gradient(135deg, hsl(185 85% 45%), hsl(200 90% 40%));
+    --gradient-primary: linear-gradient(135deg, hsl(11 80% 55%) 0%, hsl(263 70% 50%) 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    --gradient-iridescent: linear-gradient(135deg, hsl(11 80% 65%), hsl(263 70% 60%), hsl(340 80% 60%));
+    --gradient-button-primary: linear-gradient(135deg, hsl(11 80% 55%), hsl(5 85% 45%));
 
     /* Fonts */
     --font-sans: 'Geist', sans-serif;
@@ -88,8 +86,9 @@
     --shadow-lg: 0px 20px 48px rgba(0, 0, 0, 0.45);
     --shadow-xl: 0px 28px 60px rgba(0, 0, 0, 0.50);
     --shadow-2xl: 0px 40px 80px rgba(0, 0, 0, 0.55);
-    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.3), var(--glass-shadow);
-    --shadow-glow-cyan: 0 0 40px hsl(185 85% 50% / 0.20);
+    --shadow-elegant: 0 10px 40px -10px hsl(var(--primary) / 0.2), var(--glass-shadow);
+    --shadow-glow-cyan: 0 0 40px hsl(11 80% 55% / 0.15);
+    --shadow-glow-violet: 0 0 40px hsl(263 70% 50% / 0.15);
 
     /* Misc */
     --tracking-normal: 0em;
@@ -105,11 +104,11 @@
     @apply bg-background text-foreground;
     font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     letter-spacing: var(--tracking-normal);
-    /* Subtle mesh background */
+    /* Volcanic mesh background */
     background-image: 
-      radial-gradient(ellipse 80% 50% at 20% 10%, hsl(185 85% 50% / 0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 80%, hsl(245 70% 65% / 0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 60% at 50% 40%, hsl(320 70% 60% / 0.04) 0%, transparent 70%);
+      radial-gradient(ellipse 80% 50% at 20% 10%, hsl(11 80% 55% / 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, hsl(263 70% 50% / 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 50% 40%, hsl(340 80% 60% / 0.05) 0%, transparent 70%);
     background-attachment: fixed;
   }
 }
@@ -177,47 +176,47 @@
   }
 
   .text-glass-primary {
-    background: linear-gradient(135deg, hsl(185 85% 65%) 0%, hsl(195 90% 58%) 50%, hsl(185 85% 55%) 100%);
+    background: linear-gradient(135deg, hsl(11 80% 65%) 0%, hsl(5 80% 58%) 50%, hsl(11 80% 55%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Prismatic glow effects */
-  .glow-cyan {
-    box-shadow: var(--glow-cyan), 0 4px 16px rgba(0,0,0,0.3);
+  /* Ember glow effects */
+  .glow-primary {
+    box-shadow: var(--glow-primary), 0 4px 20px rgba(0,0,0,0.4);
   }
 
-  .glow-violet {
-    box-shadow: var(--glow-violet), 0 4px 16px rgba(0,0,0,0.3);
+  .glow-accent {
+    box-shadow: var(--glow-accent), 0 4px 20px rgba(0,0,0,0.4);
   }
 
   /* Glass button primary */
   .btn-glass-primary {
-    background: linear-gradient(135deg, hsl(185 85% 42%) 0%, hsl(200 85% 38%) 100%);
-    border: 1px solid hsl(185 85% 55% / 0.4);
-    border-top: 1px solid hsl(185 85% 65% / 0.5);
+    background: linear-gradient(135deg, hsl(11 80% 50%) 0%, hsl(5 80% 45%) 100%);
+    border: 1px solid hsl(11 80% 65% / 0.3);
+    border-top: 1px solid hsl(11 80% 75% / 0.4);
     box-shadow: 
-      0 4px 16px hsl(185 85% 50% / 0.35),
-      inset 0 1px 0 hsl(185 85% 80% / 0.25),
-      0 1px 4px rgba(0,0,0,0.3);
-    color: hsl(220 25% 8%);
-    font-weight: 600;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      0 4px 20px hsl(11 80% 50% / 0.3),
+      inset 0 1px 0 hsl(11 80% 85% / 0.2),
+      0 1px 4px rgba(0,0,0,0.4);
+    color: #fff;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .btn-glass-primary:hover {
-    background: linear-gradient(135deg, hsl(185 85% 48%) 0%, hsl(200 85% 44%) 100%);
+    background: linear-gradient(135deg, hsl(11 80% 55%) 0%, hsl(5 80% 50%) 100%);
     box-shadow: 
-      0 6px 24px hsl(185 85% 50% / 0.45),
-      inset 0 1px 0 hsl(185 85% 80% / 0.30),
-      0 2px 6px rgba(0,0,0,0.25);
-    transform: translateY(-1px);
+      0 8px 30px hsl(11 80% 50% / 0.45),
+      inset 0 1px 0 hsl(11 80% 85% / 0.3),
+      0 2px 8px rgba(0,0,0,0.3);
+    transform: translateY(-2px) scale(1.02);
   }
 
   .btn-glass-primary:active {
     transform: translateY(0px) scale(0.98);
-    box-shadow: 0 2px 8px hsl(185 85% 50% / 0.3);
+    box-shadow: 0 2px 8px hsl(11 80% 50% / 0.3);
   }
 
   /* Glass button secondary */
@@ -252,8 +251,8 @@
 
   .input-glass:focus {
     background: rgba(255,255,255,0.07);
-    border-color: hsl(185 85% 50% / 0.5);
-    box-shadow: 0 0 0 3px hsl(185 85% 50% / 0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+    border-color: hsl(11 80% 55% / 0.5);
+    box-shadow: 0 0 0 3px hsl(11 80% 55% / 0.12), inset 0 1px 0 rgba(255,255,255,0.08);
     outline: none;
   }
 

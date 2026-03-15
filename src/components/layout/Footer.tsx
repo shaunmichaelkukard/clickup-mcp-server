@@ -39,8 +39,8 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-24">
           <div className="col-span-1 md:col-span-2">
-            <Link to="/" className="text-2xl font-black tracking-tighter group">
-              <span className="text-glass-primary group-hover:glow-cyan transition-all">{settings.brandName.slice(0, 7)}</span>
+            <Link to="/" className="text-2xl font-black tracking-tighter group uppercase">
+              <span className="text-iridescent group-hover:glow-primary transition-all">{settings.brandName.slice(0, 7)}</span>
               <span className="text-foreground/80">{settings.brandName.slice(7)}</span>
             </Link>
             <p className="mt-6 text-sm text-foreground/40 max-w-sm leading-relaxed">

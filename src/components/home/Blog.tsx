@@ -79,13 +79,13 @@ export const Blog = () => {
             </div>
             <div className="p-8 flex-1 flex flex-col">
               <div className="flex items-center gap-4 mb-6">
-                <span className="badge-glass text-primary/80 group-hover:text-primary transition-colors">
+                <span className="badge-glass text-primary/80 group-hover:text-primary transition-colors border-primary/10 group-hover:glow-primary">
                   {new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                 </span>
                 <div className="h-[1px] flex-1 bg-white/5 group-hover:bg-primary/20 transition-colors" />
               </div>
               
-              <h3 className="text-xl font-bold mb-4 group-hover:text-iridescent transition-colors tracking-tight leading-snug">
+              <h3 className="text-xl font-black mb-4 group-hover:text-iridescent transition-colors tracking-tight leading-snug uppercase">
                 {post.title}
               </h3>
               <p className="text-sm text-foreground/50 mb-8 line-clamp-2 leading-relaxed group-hover:text-foreground/70 transition-colors">
