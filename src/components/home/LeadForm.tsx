@@ -16,24 +16,35 @@ export const LeadForm = () => {
     e.preventDefault()
     setLoading(true)
     const formData = new FormData(e.currentTarget)
-
-    try {
-      await blink.db.leads.create({
-        userId: 'public',
-        name: formData.get('name') as string,
-        email: formData.get('email') as string,
-        company: (formData.get('company') as string) || '',
-        message: formData.get('message') as string,
-        status: 'pending',
-      })
-      toast.success('Inquiry received. Our team will contact you shortly.')
-      ;(e.target as HTMLFormElement).reset()
-    } catch {
-      toast.success('Inquiry received. Our team will contact you shortly.')
-      ;(e.target as HTMLFormElement).reset()
+    const data = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      company: (formData.get('company') as string) || '',
+      message: formData.get('message') as string,
     }
 
-    setLoading(false)
+    try {
+      // Call the Edge Function to handle database storage and email notification
+      const response = await fetch('https://zkahxjnx--send-lead-email.functions.blink.new', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to send lead')
+      }
+
+      toast.success('Inquiry received. Our team will contact you shortly.')
+      ;(e.target as HTMLFormElement).reset()
+    } catch (error) {
+      console.error('Submission error:', error)
+      toast.error('There was an error sending your inquiry. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
