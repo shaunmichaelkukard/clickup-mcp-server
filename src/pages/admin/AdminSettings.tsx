@@ -91,11 +91,26 @@ export function AdminSettings() {
     setSaving(true)
     try {
       const entries = Object.entries(data as unknown as Record<string, string>)
-      // Save all entries in parallel for speed
+
+      // Fetch existing rows to get their real DB-assigned IDs.
+      // This prevents the UNIQUE constraint failure on setting_key when the
+      // upsert ID doesn't match the already-persisted row ID.
+      const existing = await blink.db.siteSettings.list({
+        where: { userId: user.id },
+        limit: 200,
+      }) as Array<{ id: string; settingKey: string }>
+
+      const existingById: Record<string, string> = {}
+      for (const row of existing) {
+        existingById[row.settingKey] = row.id
+      }
+
+      // Upsert each setting using the existing row's ID if one is found,
+      // otherwise generate a fresh deterministic ID.
       await Promise.all(
         entries.map(([key, value]) =>
           blink.db.siteSettings.upsert({
-            id: `${user.id}_${key}`,
+            id: existingById[key] ?? `${user.id}_${key}`,
             userId: user.id,
             settingKey: key,
             settingValue: value ?? '',
@@ -106,13 +121,8 @@ export function AdminSettings() {
       toast.success('Settings saved')
     } catch (err: unknown) {
       console.error('Save error:', err)
-      // 403 "projectId missing in token" means the cached auth token is stale/mismatched.
-      // Force a fresh login to get a valid token for this project.
       const errObj = err as { status?: number; details?: { error?: string } }
-      if (
-        errObj?.status === 403 &&
-        errObj?.details?.error?.includes('projectId missing')
-      ) {
+      if (errObj?.status === 403 && errObj?.details?.error?.includes('projectId missing')) {
         toast.error('Session expired. Redirecting to sign in...')
         setTimeout(() => blink.auth.login(window.location.href), 1500)
       } else {
