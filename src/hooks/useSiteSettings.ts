@@ -67,7 +67,7 @@ export function useSiteSettings() {
 
   const fetchSettings = useCallback(async () => {
     try {
-      const rows = await blink.db.siteSettings.list({ limit: 100 })
+      const rows = await blink.db.siteSettings.list({ limit: 200 })
       if (rows && rows.length > 0) {
         const merged = { ...defaults }
         rows.forEach((row: { settingKey: string; settingValue: string }) => {
@@ -77,8 +77,9 @@ export function useSiteSettings() {
         })
         setSettings(merged)
       }
-    } catch {
-      // Use defaults on error
+    } catch (err) {
+      console.error('Failed to load settings, using defaults:', err)
+      // Use defaults on error - site still displays
     } finally {
       setLoading(false)
     }
@@ -90,3 +91,5 @@ export function useSiteSettings() {
 
   return { settings, loading, refetch: fetchSettings, defaults }
 }
+
+export { defaults as siteSettingsDefaults }

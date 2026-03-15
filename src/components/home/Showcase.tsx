@@ -70,36 +70,51 @@ export const Showcase = () => {
       title={settings.showcaseTitle}
       subtitle={settings.showcaseSubtitle}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {projects.map((project, index) => (
           <div
             key={project.id}
-            className="group relative bg-background overflow-hidden aspect-[16/10]"
+            className="glass-card group overflow-hidden flex flex-col hover:scale-[1.01] transition-all duration-500 animate-slide-up"
+            style={{ animationDelay: `${index * 150}ms` }}
           >
-            <img
-              src={project.imageUrl}
-              alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-75 group-hover:brightness-100"
-            />
-            <div className="absolute inset-0 bg-background/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-              <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-primary mb-2 block">
-                      {project.category}
-                    </span>
-                    <h3 className="text-2xl font-bold text-foreground mb-2">{project.title}</h3>
-                    <p className="text-sm text-muted-foreground max-w-sm">{project.description}</p>
-                  </div>
-                  <div className="h-10 w-10 bg-primary flex items-center justify-center">
-                    <ArrowUpRight className="h-5 w-5 text-primary-foreground" />
-                  </div>
-                </div>
+            <div className="relative aspect-[16/10] overflow-hidden">
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 brightness-90 group-hover:brightness-100"
+              />
+              <div className="absolute top-4 left-4">
+                <span className="badge-glass text-white shadow-glow-cyan">
+                  {project.category}
+                </span>
+              </div>
+              <div className="absolute bottom-4 right-4 h-12 w-12 glass rounded-full flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+                <ArrowUpRight className="h-6 w-6" />
               </div>
             </div>
-
-            <div className="absolute top-6 left-6 text-[10px] font-mono text-foreground/30">
-              0{index + 1}
+            
+            <div className="p-8 flex-1 flex flex-col justify-between bg-gradient-to-b from-transparent to-white/5">
+              <div>
+                <div className="flex items-center gap-4 mb-3">
+                   <div className="text-[10px] font-mono text-primary/40 font-bold">0{index + 1}</div>
+                   <div className="h-[1px] w-8 bg-primary/20" />
+                </div>
+                <h3 className="text-2xl font-bold text-foreground mb-3 tracking-tighter group-hover:text-iridescent transition-colors">
+                  {project.title}
+                </h3>
+                <p className="text-sm text-foreground/50 leading-relaxed max-w-md">
+                  {project.description}
+                </p>
+              </div>
+              
+              <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
+                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/30 group-hover:text-primary/60 transition-colors">
+                  Case Study Available
+                </span>
+                <span className="text-[10px] font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                  EXPLORE PROJECT
+                </span>
+              </div>
             </div>
           </div>
         ))}

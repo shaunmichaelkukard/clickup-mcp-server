@@ -43,57 +43,97 @@ export const LeadForm = () => {
       subtitle={settings.contactSubtitle}
       containerClassName="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start"
     >
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-xl font-bold uppercase tracking-tighter mb-4">Direct Contact</h3>
-          <p className="text-muted-foreground mb-6">
+      <div className="space-y-8 animate-fade-in">
+        <div className="glass-card p-8 group">
+          <h3 className="text-lg font-black uppercase tracking-widest mb-6 text-foreground group-hover:text-iridescent transition-colors flex items-center gap-3">
+            <div className="h-1 w-8 bg-primary/40 rounded-full" />
+            Direct Contact
+          </h3>
+          <p className="text-sm text-foreground/50 mb-8 leading-relaxed">
             For urgent inquiries or private portfolio discussions, reach out to our principal partners directly.
           </p>
-          <div className="space-y-2 font-mono text-sm">
-            <p>E: {settings.contactEmail}</p>
-            <p>T: {settings.contactPhone}</p>
+          <div className="space-y-4 font-mono text-xs">
+            <div className="flex items-center justify-between p-4 rounded-xl glass border-white/5 group/link hover:border-primary/30 transition-all">
+              <span className="text-foreground/40 uppercase tracking-widest font-bold">Email</span>
+              <span className="text-foreground group-hover/link:text-primary transition-colors">{settings.contactEmail}</span>
+            </div>
+            <div className="flex items-center justify-between p-4 rounded-xl glass border-white/5 group/link hover:border-primary/30 transition-all">
+              <span className="text-foreground/40 uppercase tracking-widest font-bold">Phone</span>
+              <span className="text-foreground group-hover/link:text-primary transition-colors">{settings.contactPhone}</span>
+            </div>
           </div>
         </div>
 
-        <div>
-          <h3 className="text-xl font-bold uppercase tracking-tighter mb-4">Our Offices</h3>
-          <div className="grid grid-cols-2 gap-8 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            <div>
-              <p className="text-foreground mb-2">{settings.office1Name}</p>
-              <p>{settings.office1Address1}</p>
-              <p>{settings.office1Address2}</p>
+        <div className="glass-card p-8">
+          <h3 className="text-lg font-black uppercase tracking-widest mb-8 text-foreground flex items-center gap-3">
+            <div className="h-1 w-8 bg-accent/40 rounded-full" />
+            Global Offices
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <div className="badge-glass w-fit text-primary font-bold shadow-glow-cyan">{settings.office1Name}</div>
+              <div className="space-y-1 text-xs text-foreground/40 leading-relaxed font-mono uppercase tracking-widest">
+                <p className="text-foreground/60">{settings.office1Address1}</p>
+                <p>{settings.office1Address2}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-foreground mb-2">{settings.office2Name}</p>
-              <p>{settings.office2Address1}</p>
-              <p>{settings.office2Address2}</p>
+            <div className="space-y-4">
+              <div className="badge-glass w-fit text-accent font-bold shadow-glow-violet">{settings.office2Name}</div>
+              <div className="space-y-1 text-xs text-foreground/40 leading-relaxed font-mono uppercase tracking-widest">
+                <p className="text-foreground/60">{settings.office2Address1}</p>
+                <p>{settings.office2Address2}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 border border-border">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <label className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Full Name</label>
-            <Input name="name" required placeholder="John Doe" className="bg-secondary border-none h-12" />
+      <form onSubmit={handleSubmit} className="glass-card p-10 space-y-8 animate-slide-up" style={{ animationDelay: '200ms' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-1">Full Name</label>
+            <input 
+              name="name" 
+              required 
+              placeholder="John Doe" 
+              className="input-glass w-full h-14 px-5 text-sm placeholder:text-foreground/20 text-foreground" 
+            />
           </div>
-          <div className="space-y-2">
-            <label className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Email Address</label>
-            <Input name="email" type="email" required placeholder="john@company.com" className="bg-secondary border-none h-12" />
+          <div className="space-y-3">
+            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-1">Email Address</label>
+            <input 
+              name="email" 
+              type="email" 
+              required 
+              placeholder="john@company.com" 
+              className="input-glass w-full h-14 px-5 text-sm placeholder:text-foreground/20 text-foreground" 
+            />
           </div>
         </div>
-        <div className="space-y-2">
-          <label className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Company (Optional)</label>
-          <Input name="company" placeholder="Agency or Developer Name" className="bg-secondary border-none h-12" />
+        <div className="space-y-3">
+          <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-1">Company (Optional)</label>
+          <input 
+            name="company" 
+            placeholder="Agency or Developer Name" 
+            className="input-glass w-full h-14 px-5 text-sm placeholder:text-foreground/20 text-foreground" 
+          />
         </div>
-        <div className="space-y-2">
-          <label className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Message</label>
-          <Textarea name="message" required placeholder="Tell us about your property or project..." className="bg-secondary border-none min-h-[150px] resize-none" />
+        <div className="space-y-3">
+          <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-1">Message</label>
+          <textarea 
+            name="message" 
+            required 
+            placeholder="Tell us about your property or project..." 
+            className="input-glass w-full min-h-[160px] p-5 text-sm placeholder:text-foreground/20 text-foreground resize-none" 
+          />
         </div>
-        <Button type="submit" disabled={loading} className="w-full h-14 uppercase font-mono tracking-widest">
-          {loading ? 'Sending...' : 'Send Inquiry'} <Send className="ml-2 h-4 w-4" />
-        </Button>
+        <button 
+          type="submit" 
+          disabled={loading} 
+          className="btn-glass-primary w-full h-16 uppercase font-black tracking-[0.3em] text-[11px] flex items-center justify-center rounded-xl shadow-glow-cyan transition-all"
+        >
+          {loading ? 'Processing...' : 'Send Inquiry'} <Send className="ml-3 h-4 w-4" />
+        </button>
       </form>
     </Section>
   )

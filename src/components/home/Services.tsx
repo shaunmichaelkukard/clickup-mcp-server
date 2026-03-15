@@ -33,23 +33,28 @@ export const Services = () => {
       id="services"
       title={settings.servicesTitle}
       subtitle={settings.servicesSubtitle}
-      dark
     >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {services.map((service, index) => (
           <div
             key={service.title}
-            className="p-8 border border-primary/10 hover:border-primary/30 transition-colors bg-primary/5 backdrop-blur-sm group"
+            className="glass-card p-10 group hover:scale-[1.02] transition-all duration-500 animate-slide-up"
+            style={{ animationDelay: `${index * 100}ms` }}
           >
-            <div className="mb-6 h-12 w-12 flex items-center justify-center bg-primary text-primary-foreground group-hover:scale-110 transition-transform">
-              <service.icon className="h-6 w-6" />
+            <div className="mb-8 h-16 w-16 rounded-2xl flex items-center justify-center glass border-white/10 text-primary group-hover:text-white group-hover:glow-cyan transition-all duration-500 group-hover:-translate-y-2">
+              <service.icon className="h-8 w-8" />
             </div>
-            <h3 className="text-xl font-bold mb-4 uppercase tracking-tighter">{service.title}</h3>
-            <p className="text-sm text-foreground/60 leading-relaxed">
+            <h3 className="text-xl font-bold mb-4 uppercase tracking-tighter text-foreground group-hover:text-iridescent transition-colors">
+              {service.title}
+            </h3>
+            <p className="text-sm text-foreground/50 leading-relaxed group-hover:text-foreground/70 transition-colors">
               {service.description}
             </p>
-            <div className="mt-8 text-[10px] font-mono text-primary/30 group-hover:text-primary/70 transition-colors">
-              SERVICE_0{index + 1}
+            <div className="mt-8 flex items-center justify-between">
+              <div className="text-[10px] font-mono text-foreground/20 group-hover:text-primary/50 transition-colors tracking-widest font-bold">
+                SERVICE_0{index + 1}
+              </div>
+              <div className="h-[1px] flex-1 bg-white/5 mx-4 group-hover:bg-primary/20 transition-colors" />
             </div>
           </div>
         ))}

@@ -18,21 +18,21 @@ export const Navbar = () => {
   const brandParts = settings.brandName.match(/^(\w+)(\w+)$/) || [settings.brandName, settings.brandName.slice(0, -6), settings.brandName.slice(-6)]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-6xl z-50 glass-panel rounded-2xl overflow-hidden">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="text-xl font-bold tracking-tighter hover:opacity-80 transition-opacity">
-              <span className="text-primary">{settings.brandName.slice(0, 7)}</span><span className="text-muted-foreground">{settings.brandName.slice(7)}</span>
+              <span className="text-glass-primary">{settings.brandName.slice(0, 7)}</span><span className="text-foreground/80">{settings.brandName.slice(7)}</span>
             </Link>
           </div>
 
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-2">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="px-4 py-1.5 text-xs font-medium text-foreground/70 hover:text-foreground hover:bg-white/5 rounded-full transition-all border border-transparent hover:border-white/10"
               >
                 {link.name}
               </a>
@@ -41,24 +41,24 @@ export const Navbar = () => {
 
           <div className="hidden md:flex items-center gap-3">
             <a href="#contact">
-              <Button size="sm" className="font-mono text-xs uppercase tracking-widest">
+              <button className="btn-glass-primary px-5 py-2 rounded-full text-[10px] uppercase tracking-widest font-bold">
                 Start Project
-              </Button>
+              </button>
             </a>
-            <Link to="/admin" className="p-2 text-muted-foreground hover:text-primary transition-colors" title="Admin Hub">
-              <Settings className="h-4 w-4" />
+            <Link to="/admin" className="p-2 text-foreground/50 hover:text-primary transition-colors glass rounded-full" title="Admin Hub">
+              <Settings className="h-3.5 w-3.5" />
             </Link>
           </div>
 
           <div className="md:hidden flex items-center gap-2">
-            <Link to="/admin" className="p-2 text-muted-foreground hover:text-primary transition-colors">
+            <Link to="/admin" className="p-2 text-foreground/50 hover:text-primary transition-colors glass rounded-full">
               <Settings className="h-4 w-4" />
             </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-foreground hover:text-muted-foreground transition-colors"
+              className="p-2 glass rounded-full text-foreground hover:text-primary transition-colors"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -66,21 +66,23 @@ export const Navbar = () => {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden bg-background border-b border-border">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div className="md:hidden glass-panel border-t border-white/10 animate-fade-in">
+          <div className="px-4 pt-2 pb-6 space-y-1">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="block px-4 py-3 text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-white/5 rounded-xl transition-colors"
               >
                 {link.name}
               </a>
             ))}
-            <div className="px-3 py-2">
+            <div className="pt-4">
               <a href="#contact" onClick={() => setIsOpen(false)}>
-                <Button className="w-full justify-center">Start Project</Button>
+                <button className="btn-glass-primary w-full py-3 rounded-xl uppercase font-bold tracking-widest text-[10px]">
+                  Start Project
+                </button>
               </a>
             </div>
           </div>

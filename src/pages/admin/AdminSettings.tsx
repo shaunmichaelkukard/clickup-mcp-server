@@ -84,23 +84,28 @@ export function AdminSettings() {
   }, [settings, settingsLoading])
 
   const handleSave = async (data: SiteSettings = form) => {
-    if (!user) return
+    if (!user) {
+      toast.error('You must be signed in to save settings')
+      return
+    }
     setSaving(true)
     try {
       const entries = Object.entries(data as unknown as Record<string, string>)
-      for (const [key, value] of entries) {
-        // Only save if it's different from current server state to optimize
-        if (settings[key as keyof SiteSettings] !== value) {
-          await blink.db.siteSettings.upsert({
-            id: key,
+      // Save all entries in parallel for speed
+      await Promise.all(
+        entries.map(([key, value]) =>
+          blink.db.siteSettings.upsert({
+            id: `${user.id}_${key}`,
             userId: user.id,
             settingKey: key,
-            settingValue: value,
+            settingValue: value ?? '',
           })
-        }
-      }
+        )
+      )
       setLastSaved(new Date())
-    } catch {
+      toast.success('Settings saved')
+    } catch (err) {
+      console.error('Save error:', err)
       toast.error('Failed to save settings')
     } finally {
       setSaving(false)
@@ -148,93 +153,119 @@ export function AdminSettings() {
 
   if (settingsLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-6 w-6 animate-spin text-primary" />
+      <div className="flex items-center justify-center h-screen bg-[#080c14]">
+        <div className="relative">
+          <div className="absolute inset-0 blur-2xl bg-primary/20 animate-pulse" />
+          <Loader2 className="h-10 w-10 animate-spin text-primary relative z-10" />
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="p-6 lg:p-10 space-y-8 max-w-4xl">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tighter uppercase">Site Settings</h1>
-          <p className="text-muted-foreground text-sm mt-1">
-            Edit all website text, headings, contact info, and images.
+    <div className="p-6 lg:p-10 space-y-10 max-w-5xl mx-auto">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold tracking-tighter uppercase text-iridescent">Site Settings</h1>
+          <p className="text-muted-foreground text-sm max-w-md">
+            Fine-tune every aspect of your website's presence, from hero sections to office details.
           </p>
-          <div className="flex items-center gap-2 mt-2 h-5">
+          <div className="h-6">
             {saving ? (
-              <p className="text-[10px] font-mono uppercase text-primary animate-pulse flex items-center gap-1.5">
+              <p className="text-[10px] font-mono uppercase text-primary animate-pulse flex items-center gap-2 px-2 py-1 glass-card w-fit rounded-full border-primary/20">
                 <Loader2 className="h-3 w-3 animate-spin" />
-                Saving changes...
+                Syncing changes...
               </p>
             ) : lastSaved ? (
-              <p className="text-[10px] font-mono uppercase text-muted-foreground flex items-center gap-1.5">
+              <p className="text-[10px] font-mono uppercase text-muted-foreground flex items-center gap-2 px-2 py-1 glass-card w-fit rounded-full border-white/5 bg-white/5">
                 <CheckCircle2 className="h-3 w-3 text-green-500" />
-                Last saved at {lastSaved.toLocaleTimeString()}
+                Last saved: {lastSaved.toLocaleTimeString()}
               </p>
             ) : null}
           </div>
         </div>
-        <Button onClick={() => handleSave()} disabled={saving} className="h-10 uppercase font-mono text-xs tracking-widest">
+        <Button 
+          onClick={() => handleSave()} 
+          disabled={saving} 
+          className="btn-glass-primary h-12 px-8 uppercase font-mono text-xs tracking-widest glow-cyan shrink-0"
+        >
           {saving ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Save className="h-4 w-4 mr-2" />}
-          Save Now
+          Save Changes
         </Button>
       </div>
 
-      {settingGroups.map((group) => (
-        <div key={group.title} className="border border-border bg-card p-6 space-y-4">
-          <h2 className="text-sm font-mono uppercase tracking-widest text-primary">{group.title}</h2>
-          {group.fields.map((field) => (
-            <div key={field.key} className="space-y-1.5">
-              <label className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
-                {field.label}
-              </label>
-              {field.key === 'heroImageUrl' ? (
-                <div className="space-y-2">
-                  <div className="flex gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-24">
+        {settingGroups.map((group) => (
+          <div 
+            key={group.title} 
+            className="glass-card p-6 space-y-6 relative overflow-hidden group border-t border-l border-white/10"
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl -mr-16 -mt-16 group-hover:bg-primary/10 transition-colors" />
+            
+            <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-primary flex items-center gap-3">
+              <span className="w-8 h-[1px] bg-primary/30" />
+              {group.title}
+            </h2>
+            
+            <div className="space-y-5">
+              {group.fields.map((field) => (
+                <div key={field.key} className="space-y-2">
+                  <label className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest ml-1">
+                    {field.label}
+                  </label>
+                  {field.key === 'heroImageUrl' ? (
+                    <div className="space-y-3">
+                      <div className="flex gap-2">
+                        <Input
+                          value={getVal(field.key)}
+                          onChange={(e) => handleChange(field.key, e.target.value)}
+                          className="input-glass h-11 flex-1 text-sm"
+                          placeholder="URL..."
+                        />
+                        <label className="btn-glass-secondary flex items-center gap-2 px-4 h-11 cursor-pointer transition-all text-[10px] font-mono uppercase rounded-xl border border-white/10 shrink-0">
+                          {uploadingHero ? <Loader2 className="h-3 w-3 animate-spin" /> : <Upload className="h-3 w-3" />}
+                          <input type="file" accept="image/*" className="hidden" onChange={handleHeroUpload} />
+                        </label>
+                      </div>
+                      {getVal(field.key) && (
+                        <div className="relative group/img aspect-video rounded-xl overflow-hidden border border-white/10 shadow-lg">
+                          <img
+                            src={getVal(field.key)}
+                            alt="Hero preview"
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity" />
+                        </div>
+                      )}
+                    </div>
+                  ) : field.type === 'textarea' ? (
+                    <Textarea
+                      value={getVal(field.key)}
+                      onChange={(e) => handleChange(field.key, e.target.value)}
+                      className="input-glass min-h-[100px] text-sm leading-relaxed"
+                    />
+                  ) : (
                     <Input
                       value={getVal(field.key)}
                       onChange={(e) => handleChange(field.key, e.target.value)}
-                      className="bg-secondary border-none h-10 flex-1"
-                      placeholder="Enter URL or upload..."
-                    />
-                    <label className="flex items-center gap-2 px-4 h-10 bg-secondary hover:bg-muted cursor-pointer transition-colors text-xs font-mono uppercase">
-                      {uploadingHero ? <Loader2 className="h-3 w-3 animate-spin" /> : <Upload className="h-3 w-3" />}
-                      Upload
-                      <input type="file" accept="image/*" className="hidden" onChange={handleHeroUpload} />
-                    </label>
-                  </div>
-                  {getVal(field.key) && (
-                    <img
-                      src={getVal(field.key)}
-                      alt="Hero preview"
-                      className="w-full h-32 object-cover border border-border"
+                      className="input-glass h-11 text-sm"
                     />
                   )}
                 </div>
-              ) : field.type === 'textarea' ? (
-                <Textarea
-                  value={getVal(field.key)}
-                  onChange={(e) => handleChange(field.key, e.target.value)}
-                  className="bg-secondary border-none min-h-[80px] resize-none"
-                />
-              ) : (
-                <Input
-                  value={getVal(field.key)}
-                  onChange={(e) => handleChange(field.key, e.target.value)}
-                  className="bg-secondary border-none h-10"
-                />
-              )}
+              ))}
             </div>
-          ))}
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
 
-      <div className="sticky bottom-4 lg:bottom-0">
-        <Button onClick={() => handleSave()} disabled={saving} className="w-full h-12 uppercase font-mono tracking-widest">
-          {saving ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Save className="h-4 w-4 mr-2" />}
-          Save All Changes
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-4xl z-40 md:hidden">
+        <Button 
+          onClick={() => handleSave()} 
+          disabled={saving} 
+          className="btn-glass-primary w-full h-14 uppercase font-mono tracking-widest text-sm glow-cyan shadow-2xl"
+        >
+          {saving ? <Loader2 className="h-5 w-5 animate-spin mr-2" /> : <Save className="h-5 w-5 mr-2" />}
+          Update All Settings
         </Button>
       </div>
     </div>

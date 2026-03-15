@@ -63,30 +63,38 @@ export const Blog = () => {
       title={settings.blogTitle}
       subtitle={settings.blogSubtitle}
     >
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-        {posts.map((post) => (
-          <div key={post.id} className="group cursor-pointer">
-            <div className="aspect-[4/3] mb-6 overflow-hidden bg-muted">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {posts.map((post, index) => (
+          <div 
+            key={post.id} 
+            className="glass-card group cursor-pointer flex flex-col hover:scale-[1.02] transition-all duration-500 animate-slide-up"
+            style={{ animationDelay: `${index * 200}ms` }}
+          >
+            <div className="aspect-[16/10] overflow-hidden">
               <img
                 src={post.imageUrl}
                 alt={post.title}
-                className="w-full h-full object-cover brightness-75 transition-all duration-500 group-hover:brightness-100 group-hover:scale-105"
+                className="w-full h-full object-cover brightness-90 transition-all duration-1000 group-hover:brightness-110 group-hover:scale-110"
               />
             </div>
-            <div className="flex items-center space-x-4 mb-4">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-                {new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-              </span>
-              <div className="h-[1px] flex-1 bg-border" />
-            </div>
-            <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors underline-offset-4 tracking-tight">
-              {post.title}
-            </h3>
-            <p className="text-sm text-muted-foreground mb-6 line-clamp-2">
-              {post.excerpt}
-            </p>
-            <div className="flex items-center text-xs font-mono uppercase tracking-widest text-primary group-hover:translate-x-2 transition-transform">
-              Read Article <ArrowRight className="ml-2 h-4 w-4" />
+            <div className="p-8 flex-1 flex flex-col">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="badge-glass text-primary/80 group-hover:text-primary transition-colors">
+                  {new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                </span>
+                <div className="h-[1px] flex-1 bg-white/5 group-hover:bg-primary/20 transition-colors" />
+              </div>
+              
+              <h3 className="text-xl font-bold mb-4 group-hover:text-iridescent transition-colors tracking-tight leading-snug">
+                {post.title}
+              </h3>
+              <p className="text-sm text-foreground/50 mb-8 line-clamp-2 leading-relaxed group-hover:text-foreground/70 transition-colors">
+                {post.excerpt}
+              </p>
+              
+              <div className="mt-auto flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-primary group-hover:translate-x-2 transition-transform duration-300">
+                Read Full Insight <ArrowRight className="ml-2 h-4 w-4" />
+              </div>
             </div>
           </div>
         ))}
