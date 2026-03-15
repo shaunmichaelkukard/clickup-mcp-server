@@ -104,9 +104,20 @@ export function AdminSettings() {
       )
       setLastSaved(new Date())
       toast.success('Settings saved')
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Save error:', err)
-      toast.error('Failed to save settings')
+      // 403 "projectId missing in token" means the cached auth token is stale/mismatched.
+      // Force a fresh login to get a valid token for this project.
+      const errObj = err as { status?: number; details?: { error?: string } }
+      if (
+        errObj?.status === 403 &&
+        errObj?.details?.error?.includes('projectId missing')
+      ) {
+        toast.error('Session expired. Redirecting to sign in...')
+        setTimeout(() => blink.auth.login(window.location.href), 1500)
+      } else {
+        toast.error('Failed to save settings. Please try again.')
+      }
     } finally {
       setSaving(false)
     }

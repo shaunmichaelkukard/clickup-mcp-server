@@ -85,7 +85,15 @@ export function AdminBlog() {
         setShowForm(false)
         fetchPosts()
       }
-    } catch { toast.error('Failed to save') }
+    } catch (err: unknown) {
+      const errObj = err as { status?: number; details?: { error?: string } }
+      if (errObj?.status === 403 && errObj?.details?.error?.includes('projectId missing')) {
+        toast.error('Session expired. Please sign in again.')
+        setTimeout(() => blink.auth.login(window.location.href), 1500)
+      } else {
+        toast.error('Failed to save')
+      }
+    }
     finally { setSaving(false) }
   }
 

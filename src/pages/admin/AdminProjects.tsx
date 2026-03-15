@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
-import { Plus, Trash2, Loader2, Upload, Pencil, X, CheckCircle2 } from 'lucide-react'
+import { Plus, Trash2, Loader2, Upload, Pencil, X, CheckCircle2, FolderOpen } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 interface Project {
   id: string
@@ -84,7 +85,15 @@ export function AdminProjects() {
         setShowForm(false)
         fetchProjects()
       }
-    } catch { toast.error('Failed to save') }
+    } catch (err: unknown) {
+      const errObj = err as { status?: number; details?: { error?: string } }
+      if (errObj?.status === 403 && errObj?.details?.error?.includes('projectId missing')) {
+        toast.error('Session expired. Please sign in again.')
+        setTimeout(() => blink.auth.login(window.location.href), 1500)
+      } else {
+        toast.error('Failed to save')
+      }
+    }
     finally { setSaving(false) }
   }
 
