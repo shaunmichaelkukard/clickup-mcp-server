@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
-import { Send } from 'lucide-react'
+import { Send, MessageCircle } from 'lucide-react'
 import { blink } from '@/lib/blink'
 import { useSiteSettings } from '@/hooks/useSiteSettings'
 
@@ -61,17 +61,21 @@ export const LeadForm = () => {
             Direct Connect
           </h3>
           <p className="text-sm text-foreground/50 mb-8 leading-relaxed">
-            For urgent inquiries or private portfolio discussions, reach out to our principal partners directly.
+            Reach out to our Director, <span className="text-primary font-bold">{settings.directorName}</span>, for private portfolio discussions.
           </p>
           <div className="space-y-4 font-mono text-xs">
-            <div className="flex items-center justify-between p-4 rounded-xl glass border-white/5 group/link hover:border-primary/30 transition-all">
+            <a href={`mailto:${settings.contactEmail}`} className="flex items-center justify-between p-4 rounded-xl glass border-white/5 group/link hover:border-primary/30 transition-all">
               <span className="text-foreground/40 uppercase tracking-widest font-bold">Email</span>
               <span className="text-foreground group-hover/link:text-primary transition-colors">{settings.contactEmail}</span>
-            </div>
-            <div className="flex items-center justify-between p-4 rounded-xl glass border-white/5 group/link hover:border-primary/30 transition-all">
-              <span className="text-foreground/40 uppercase tracking-widest font-bold">Phone</span>
+            </a>
+            <a href={`tel:${settings.contactPhone}`} className="flex items-center justify-between p-4 rounded-xl glass border-white/5 group/link hover:border-primary/30 transition-all">
+              <span className="text-foreground/40 uppercase tracking-widest font-bold">Cell</span>
               <span className="text-foreground group-hover/link:text-primary transition-colors">{settings.contactPhone}</span>
-            </div>
+            </a>
+            <a href={`https://wa.me/${settings.whatsappPhone.replace(/\s+/g, '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 rounded-xl glass border-white/5 group/link hover:border-green-500/30 transition-all">
+              <span className="text-foreground/40 uppercase tracking-widest font-bold flex items-center gap-2">WhatsApp <MessageCircle className="h-3 w-3 text-green-500" /></span>
+              <span className="text-foreground group-hover/link:text-green-500 transition-colors">{settings.whatsappPhone}</span>
+            </a>
           </div>
         </div>
 

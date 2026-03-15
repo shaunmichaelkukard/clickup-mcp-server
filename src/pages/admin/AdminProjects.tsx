@@ -15,6 +15,7 @@ interface Project {
   imageUrl: string
   category: string
   link: string
+  tourUrl?: string
 }
 
 export function AdminProjects() {
@@ -26,7 +27,7 @@ export function AdminProjects() {
   const [uploading, setUploading] = useState(false)
   const [saving, setSaving] = useState(false)
   const [lastSaved, setLastSaved] = useState<Date | null>(null)
-  const [form, setForm] = useState({ title: '', description: '', imageUrl: '', category: '', link: '' })
+  const [form, setForm] = useState({ title: '', description: '', imageUrl: '', category: '', link: '', tourUrl: '' })
 
   const fetchProjects = async () => {
     if (!user) return
@@ -67,6 +68,7 @@ export function AdminProjects() {
           imageUrl: form.imageUrl,
           category: form.category,
           link: form.link,
+          tourUrl: form.tourUrl,
         })
         setLastSaved(new Date())
         fetchProjects()
@@ -78,9 +80,10 @@ export function AdminProjects() {
           imageUrl: form.imageUrl,
           category: form.category,
           link: form.link || '',
+          tourUrl: form.tourUrl || '',
         })
         toast.success('Project created')
-        setForm({ title: '', description: '', imageUrl: '', category: '', link: '' })
+        setForm({ title: '', description: '', imageUrl: '', category: '', link: '', tourUrl: '' })
         setEditing(null)
         setShowForm(false)
         fetchProjects()
@@ -109,7 +112,7 @@ export function AdminProjects() {
   }, [form, editing, user])
 
   const handleEdit = (p: Project) => {
-    setForm({ title: p.title, description: p.description, imageUrl: p.imageUrl, category: p.category, link: p.link || '' })
+    setForm({ title: p.title, description: p.description, imageUrl: p.imageUrl, category: p.category, link: p.link || '', tourUrl: p.tourUrl || '' })
     setEditing(p.id)
     setShowForm(true)
   }
@@ -130,7 +133,7 @@ export function AdminProjects() {
           <p className="text-muted-foreground text-sm max-w-md">Manage your creative portfolio and showcase your best work.</p>
         </div>
         <Button 
-          onClick={() => { setShowForm(!showForm); setEditing(null); setForm({ title: '', description: '', imageUrl: '', category: '', link: '' }); setLastSaved(null) }} 
+          onClick={() => { setShowForm(!showForm); setEditing(null); setForm({ title: '', description: '', imageUrl: '', category: '', link: '', tourUrl: '' }); setLastSaved(null) }} 
           className={cn(
             "h-12 px-8 uppercase font-mono text-xs tracking-[0.2em] transition-all duration-500 rounded-xl border border-white/10",
             showForm ? "btn-glass-secondary" : "btn-glass-primary glow-primary"
@@ -178,6 +181,10 @@ export function AdminProjects() {
               <div className="space-y-2">
                 <label className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest ml-1">External Link</label>
                 <Input placeholder="https://..." value={form.link} onChange={(e) => setForm({ ...form, link: e.target.value })} className="input-glass h-12" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest ml-1">3D Tour URL (Iframe or .glb)</label>
+                <Input placeholder="https://matterport.com/... or .glb file" value={form.tourUrl} onChange={(e) => setForm({ ...form, tourUrl: e.target.value })} className="input-glass h-12" />
               </div>
             </div>
 

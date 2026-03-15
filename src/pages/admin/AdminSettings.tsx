@@ -26,6 +26,12 @@ const settingGroups = [
     ],
   },
   {
+    title: 'Executive Details',
+    fields: [
+      { key: 'directorName', label: 'Director Name', type: 'input' },
+    ],
+  },
+  {
     title: 'Section Headings',
     fields: [
       { key: 'showcaseTitle', label: 'Showcase Title', type: 'input' },
@@ -42,7 +48,8 @@ const settingGroups = [
       { key: 'contactTitle', label: 'Contact Section Title', type: 'input' },
       { key: 'contactSubtitle', label: 'Contact Subtitle', type: 'textarea' },
       { key: 'contactEmail', label: 'Email', type: 'input' },
-      { key: 'contactPhone', label: 'Phone', type: 'input' },
+      { key: 'contactPhone', label: 'Cellular', type: 'input' },
+      { key: 'whatsappPhone', label: 'WhatsApp', type: 'input' },
     ],
   },
   {

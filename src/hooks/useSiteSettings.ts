@@ -8,8 +8,10 @@ export interface SiteSettings {
   heroBadge: string
   heroImageUrl: string
   // Contact
+  directorName: string
   contactEmail: string
   contactPhone: string
+  whatsappPhone: string
   contactTitle: string
   contactSubtitle: string
   // Offices
@@ -40,8 +42,10 @@ const defaults: SiteSettings = {
   heroSubtitle: 'JacksonCartel delivers bespoke marketing campaigns that convert leads into legends. We specialize in strategic visibility for the world\'s most prestigious properties.',
   heroBadge: 'Property Marketing Specialists',
   heroImageUrl: 'https://images.unsplash.com/photo-1758957701419-2c6e266f7988?auto=format&fit=crop&q=80&w=2000',
-  contactEmail: 'hello@jacksoncartel.com',
-  contactPhone: '+1 (555) 0123 4567',
+  directorName: 'Shaun Michael Kukard',
+  contactEmail: 'shaunmichael@galaxyhit.com',
+  contactPhone: '079 9498147',
+  whatsappPhone: '081 259 3850',
   contactTitle: 'Start a Project',
   contactSubtitle: 'Ready to elevate your property\'s market presence? Get in touch to discuss a bespoke strategic campaign.',
   office1Name: 'New York',

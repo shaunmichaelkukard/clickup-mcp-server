@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Section } from '@/components/layout/Section'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Box } from 'lucide-react'
 import { blink } from '@/lib/blink'
 import { useSiteSettings } from '@/hooks/useSiteSettings'
+import { PropertyTour } from './PropertyTour'
 
 interface Project {
   id: string
@@ -10,6 +11,7 @@ interface Project {
   description: string
   imageUrl: string
   category: string
+  tourUrl?: string
 }
 
 const fallbackProjects: Project[] = [
@@ -26,6 +28,7 @@ const fallbackProjects: Project[] = [
     description: 'Lead generation initiative resulting in 150+ high-intent buyer inquiries.',
     imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800',
     category: 'Lead Generation',
+    tourUrl: 'https://example.com/tour/elysian-heights'
   },
   {
     id: 'p3',
@@ -40,12 +43,14 @@ const fallbackProjects: Project[] = [
     description: 'Content strategy and social media management for modern urban living.',
     imageUrl: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=800',
     category: 'Content Marketing',
+    tourUrl: 'https://example.com/tour/skyline-lofts'
   },
 ]
 
 export const Showcase = () => {
   const { settings } = useSiteSettings()
   const [projects, setProjects] = useState<Project[]>(fallbackProjects)
+  const [activeTour, setActiveTour] = useState<string | null>(null)
 
   useEffect(() => {
     const load = async () => {
@@ -83,10 +88,19 @@ export const Showcase = () => {
                 alt={project.title}
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 brightness-90 group-hover:brightness-100"
               />
-              <div className="absolute top-4 left-4">
+              <div className="absolute top-4 left-4 flex flex-col gap-2">
                 <span className="badge-glass text-white glow-primary border-primary/20">
                   {project.category}
                 </span>
+                {project.tourUrl && (
+                  <button 
+                    onClick={() => setActiveTour(project.tourUrl!)}
+                    className="badge-glass text-primary glow-primary border-primary/20 flex items-center gap-2 hover:scale-105 transition-transform"
+                  >
+                    <Box className="h-3 w-3" />
+                    <span className="text-[10px] font-black uppercase tracking-widest">3D Tour</span>
+                  </button>
+                )}
               </div>
               <div className="absolute bottom-4 right-4 h-12 w-12 glass rounded-full flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
                 <ArrowUpRight className="h-6 w-6" />
@@ -119,6 +133,9 @@ export const Showcase = () => {
           </div>
         ))}
       </div>
+      {activeTour && (
+        <PropertyTour url={activeTour} onClose={() => setActiveTour(null)} />
+      )}
     </Section>
   )
 }
