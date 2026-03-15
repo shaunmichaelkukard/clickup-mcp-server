@@ -77,9 +77,14 @@ export function useSiteSettings() {
         })
         setSettings(merged)
       }
-    } catch (err) {
-      console.error('Failed to load settings, using defaults:', err)
-      // Use defaults on error - site still displays
+    } catch (err: unknown) {
+      // Silently fall back to defaults for unauthenticated visitors (401 expected on public pages)
+      const isAuthError =
+        err instanceof Error &&
+        (err.message?.includes('401') || err.message?.includes('Authentication') || (err as { code?: string }).code === 'HTTP 401')
+      if (!isAuthError) {
+        console.warn('Failed to load settings, using defaults:', err)
+      }
     } finally {
       setLoading(false)
     }
